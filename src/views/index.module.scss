@@ -1,0 +1,55 @@
+@import "../styles/spacing.module.scss";
+@import "../styles/font.module.scss";
+@import "../styles/utils.module.scss";
+
+.main {
+  margin: auto;
+  padding: $spacing-md;
+  height: 50vh;
+
+  @include respond-to {
+    width: 80vw;
+  }
+
+  @include respond-to(tablet) {
+    width: 50vw;
+  }
+
+  @include respond-to(desktop) {
+    width: 25vw;
+  }
+
+  .title {
+    @extend .title;
+    margin: 0 0 $spacing-sm 0;
+  }
+
+  .progressbar {
+    margin-bottom: $spacing-xs;
+  }
+
+  .selectionContainer {
+    display: grid;
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+
+    @include respond-to(small) {
+      .select {
+        grid-column: 1 / -1;
+      }
+      grid-template-columns: repeat(5, 1fr);
+    }
+
+    @include respond-to {
+      grid-template-columns: repeat(5, min-content);
+    }
+
+    .select {
+      cursor: pointer;
+    }
+  }
+
+  .button {
+    cursor: pointer;
+  }
+}

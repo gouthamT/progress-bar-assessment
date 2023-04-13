@@ -1,0 +1,33 @@
+$breakpoints: (
+  small: 0px,
+  mobile: 768px,
+  tablet: 992px,
+  desktop: 1200px,
+);
+
+$breakpoints: map-merge(
+  $breakpoints,
+  (
+    "small-max": map-get($breakpoints, mobile) - 1px,
+    "mobile-max": map-get($breakpoints, tablet) - 1px,
+    "tablet-max": map-get($breakpoints, desktop) - 1px,
+  )
+);
+
+@mixin respond-to($device: default) {
+  @if map-has-key($breakpoints, $device) {
+    @if map-has-key($breakpoints, $device + "-max") {
+      @media (min-width: map-get($breakpoints, $device)) and (max-width: map-get($breakpoints, $device + "-max")) {
+        @content;
+      }
+    } @else {
+      @media (min-width: map-get($breakpoints, $device)) {
+        @content;
+      }
+    }
+  } @else if $device == default {
+    @content;
+  } @else {
+    @error "No breakpoint found for #{$device}.";
+  }
+}
